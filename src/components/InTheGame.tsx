@@ -28,6 +28,8 @@ export default function InTheGame(props: InTheGameProps) {
 
   const [intervalId, setIntervalId] = useState(0);
 
+  const [animationKey, setAnimationKey] = useState(0);
+
   useEffect(() => {
     const newId = setInterval(() => {
       setSeconds((seconds) => seconds - 1);
@@ -49,6 +51,7 @@ export default function InTheGame(props: InTheGameProps) {
   const onCorrectClick = () => {
     if (questionIndex < questions.length - 1) {
       setQuestionIndex(questionIndex + 1);
+      setAnimationKey(animationKey + 1);
 
       clearInterval(intervalId);
       setSeconds(initialSeconds);
@@ -102,7 +105,7 @@ export default function InTheGame(props: InTheGameProps) {
           ></div>
         ))}
       </div>
-      <TimeBar seconds={1 - seconds / initialSeconds} />
+      <TimeBar key={animationKey} animationTime={initialSeconds} />
     </div>
   );
 }

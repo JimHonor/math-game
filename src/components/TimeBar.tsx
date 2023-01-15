@@ -1,9 +1,16 @@
-import { css } from "@emotion/react";
+import { css, keyframes } from "@emotion/react";
 
-import { percentage } from "../assets/js/utilities";
+export default function TimeBar(props: { animationTime: number }) {
+  const { animationTime } = props;
 
-export default function TimeBar(props: { seconds: number }) {
-  const { seconds } = props;
+  const slide = keyframes`
+    from {
+      width: 0%;
+    }
+    to {
+      width: 100%;
+    }    
+  `;
 
   return (
     <div
@@ -20,9 +27,8 @@ export default function TimeBar(props: { seconds: number }) {
       <div
         css={css`
           background-color: blanchedalmond;
-          width: ${percentage(seconds)};
           height: 100%;
-          transition: width 1s;
+          animation: ${slide} ${animationTime + "s"} linear;
         `}
       ></div>
     </div>
